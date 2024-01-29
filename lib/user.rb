@@ -42,18 +42,14 @@ class User
     @@all_users
   end
 
-  def show_itself
-    self
-  end
-
   # trouver u user à parti de son email
   def self.find_by_email(email)
+    search = false
     @@all_users.each do |user|
-      user if user.email.include?(email)
+      search = user if user.email == email
     end
+    return search
   end
-
-  private
 
 end
 

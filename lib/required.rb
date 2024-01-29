@@ -1,6 +1,4 @@
-require_relative './lib/user.rb'
-require_relative '.lib/event.rb'
-
+require 'time'
 require 'pry'
 require 'rubocop'
 require 'rspec'

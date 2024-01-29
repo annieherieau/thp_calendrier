@@ -96,4 +96,4 @@ mariage = Event.new( '29/01/2024 14:00', 120, "Marige de Seb et Vicky", ['zl@ema
 mariage.add_attentees(['email@email.fr', 'nom@email.com'])
 past = Event.new( '29/05/2023 14:00', 120, "Event passé", ['zldsdsd@efrdil.fr', 'nojohm@emasddil.com'])
 puts "end of file"
-binding.pry
+

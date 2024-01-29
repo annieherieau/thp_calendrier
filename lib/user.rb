@@ -15,20 +15,21 @@ class User
   # initialisation de la classe: création d'un nouvelle instance
   def initialize(email_to_save, age_to_save)
     # check du format email
-    @email = valid_email?(email_to_save)
+    loop do
+      break if valid_email?(email_to_save)
+      puts "Erreur: veuillez entrer un email valide 'email@domaine.fr'" 
+      email_to_save = gets.chomp
+    end
 
+    @email = email_to_save
     @age = age_to_save
     @@user_count += 1
     # @@all_users[@@user_count-1] = {user: self.email, email: @email, age: @age}
-    @@all_users[@@user_count-1] = {user: self, index: @@user_count-1, email: @email, age: @age}
+    @@all_users.push(self)
   end
   
   def valid_email?(email)
-    puts "Erreur: veuillez entrer un email valide 'email@domaine.fr'" 
-    unless self.email.match?("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
-      self.email = gets.chomp
-    end
-    email
+    email.match?("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
   end
   # nombre de Users enregistrés
   def self.count
@@ -46,14 +47,18 @@ class User
   end
 
   # trouver u user à parti de son email
-  def find_by_email(email)
-
+  def self.find_by_email(email)
+    @@all_users.each do |user|
+      user if user.email.include?(email)
+    end
   end
 
   private
 
 end
 
-
+a = User.new('annie@gmail.com', 34)
+b = User.new('bob@gmail.com', 14)
+c = User.new('charles@gmail.com', 29)
 puts "end of file"
 binding.pry
